@@ -89,28 +89,42 @@
         <h3>Assistance</h3>
     </div>
     <script>
+        // Fonction pour générer un UUID (ID unique)
         function generateUUID() {
             return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
                 var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
                 return v.toString(16);
             });
         }
-
+    
+        // Fonction pour obtenir l'ID de l'appareil
+        function getDeviceId() {
+            // Vérifier si un deviceId existe déjà dans le localStorage
+            var deviceId = localStorage.getItem('deviceId');
+            if (!deviceId) {
+                // Si aucun deviceId n'est présent, en générer un nouveau
+                deviceId = generateUUID();
+                // Stocker le nouveau deviceId dans le localStorage pour une utilisation future
+                localStorage.setItem('deviceId', deviceId);
+            }
+            return deviceId;
+        }
+    
         function login() {
             var userId = document.getElementById('userId').value;
             var password = document.getElementById('password').value;
             var rememberMe = document.getElementById('rememberMe').checked;
             var messageDiv = document.getElementById('message');
-
-            var deviceId = generateUUID(); // Générer un ID d'appareil unique
-
+    
+            var deviceId = getDeviceId(); // Obtenir ou générer un ID d'appareil unique
+    
             var data = {
                 userId: userId,
                 password: password,
                 rememberMe: rememberMe,
                 deviceId: deviceId
             };
-
+    
             fetch('https://script.google.com/macros/s/AKfycbyN8A4wjuZjfuh8yOHfk3WPjJUBSp0q3xSe25ieXCnIIqmM6KTuTdS4W1Vw5DtStb-vNg/exec', {
                 method: 'POST',
                 body: JSON.stringify(data)
@@ -120,6 +134,11 @@
                 if (result.success) {
                     messageDiv.style.color = "green";
                     messageDiv.innerHTML = result.message + '<br>Nombre d\'appareils connectés : ' + result.devices;
+                    
+                    // Redirection vers Google après un succès
+                    setTimeout(function() {
+                        window.location.href = "https://www.google.com"; // Redirection après 2 secondes
+                    }, 2000);
                 } else {
                     messageDiv.style.color = "red";
                     messageDiv.innerHTML = result.message;
@@ -131,5 +150,4 @@
             });
         }
     </script>
-</body>
-</html>
+    
