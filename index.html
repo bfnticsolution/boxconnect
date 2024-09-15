@@ -5,24 +5,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion</title>
     <style>
+        /* Animation de la bordure lumineuse */
+        @keyframes glowing-border {
+            0% {
+                border-color: #ff1b1b;
+                box-shadow: 0 0 10px #ff1b1b, 0 0 20px #ff1b1b, 0 0 30px #ff1b1b, 0 0 40px #ff1b1b;
+            }
+            50% {
+                border-color: #fbfbfb;
+                box-shadow: 0 0 20px #f6f6f5, 0 0 40px #a70404, 0 0 60px #fff700, 0 0 80px #c40505;
+            }
+            100% {
+                border-color: #ff1b1b;
+                box-shadow: 0 0 10px #ff1b1b, 0 0 20px #2cab09, 0 0 30px #ff1b1b, 0 0 40px #ff1b1b;
+            }
+        }
+
+        /* Animation du fond du body */
+        @keyframes backgroundAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
         body {
-            background-color: #9f0909;
+            background: linear-gradient(270deg, #ff1b1b, #ff0008, #054f12, #fff700, #df0707);
+            background-size: 1000% 1000%;
+            animation: backgroundAnimation 10s ease infinite; /* Animation du fond */
             color: white;
             font-family: Arial, sans-serif;
             text-align: center;
             margin: 0;
             padding: 0;
         }
+
         .login-container {
             margin-top: 50px;
             padding: 20px;
             background-color: #020101;
             border-radius: 30px;
             width: 90%;
-            max-width: 320px;
+            max-width: 300px;
             margin: 50px auto;
             border: 5px solid #faf7f7f9;
+            animation: glowing-border 3s infinite; /* Bordure lumineuse animée */
         }
+
         h1 { color: #e01a1a; }
         h2 { color: white; text-align: left; }
         input {
@@ -36,12 +70,15 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         button {
-            padding: 10px 20px;
+            padding: 10px 30px;
             background-color: #e01a1a;
             color: white;
-            border: none;
-            border-radius: 5px;
+            border: 5px solid #faf7f7f9;
+            border-radius: 50px;
             cursor: pointer;
+            font-family: Arial, sans-serif;
+            font-size: 1.5em;
+            animation: glowing-border 3s infinite;
         }
         button:hover { background-color: #d41717; }
         .message { margin-top: 20px; font-weight: bold; }
@@ -59,8 +96,8 @@
             border-radius: 50%;
             margin-bottom: 20px;
         }
-        @media (max-width: 480px) {
-            h1 { font-size: 1.5em; }
+        @media (max-width: 300px) {
+            h1 { font-size: 1.6em; }
             input, button { width: 90%; }
         }
     </style>
@@ -72,59 +109,72 @@
         <h2>Identifiant</h2>
         <input type="text" id="userId" placeholder="Identifiant" required>
         <h2>Mot de passe</h2>
-        <input type="password" id="password" placeholder="Mot de passe" required>
-        
+        <input type="text" id="password" placeholder="Mot de passe" required>
         <div class="remember-me">
-            <input type="checkbox" id="rememberMe">
-            <label for="rememberMe">Se souvenir de moi</label>
+            <input type="checkbox" id="rememberMe"> <label for="rememberMe">Se souvenir de moi</label>
         </div>
-        
+        <br>
         <button onclick="login()">Se connecter</button>
         <div id="message" class="message"></div>
     </div>
     <div>
         <a href="whatsapp://send?text=Bonjour! je suis sur l'application TV BOX AFRICA et je n'arrive pas à accéder&phone=22605585868">
-            <img src="https://moein.video/wp-content/uploads/2021/12/Whatsapp-Logo-GIF-WhatsApp-Icon-GIF-Royalty-Free-Animated-Icon-GIF-350px-after-effects-project.gif"  width="100px" ; height="100px";>
+            <img src="https://moein.video/wp-content/uploads/2021/12/Whatsapp-Logo-GIF-WhatsApp-Icon-GIF-Royalty-Free-Animated-Icon-GIF-350px-after-effects-project.gif" width="100px" height="100px">
         </a>
         <h3>Assistance</h3>
     </div>
     <script>
-        // Fonction pour générer un UUID (ID unique)
         function generateUUID() {
             return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
                 var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
                 return v.toString(16);
             });
         }
-    
-        // Fonction pour obtenir l'ID de l'appareil
+
         function getDeviceId() {
-            // Vérifier si un deviceId existe déjà dans le localStorage
             var deviceId = localStorage.getItem('deviceId');
             if (!deviceId) {
-                // Si aucun deviceId n'est présent, en générer un nouveau
                 deviceId = generateUUID();
-                // Stocker le nouveau deviceId dans le localStorage pour une utilisation future
                 localStorage.setItem('deviceId', deviceId);
             }
             return deviceId;
         }
-    
+
+        function checkLoginStatus() {
+            var userId = localStorage.getItem('userId');
+            var password = localStorage.getItem('password');
+            var expiry = localStorage.getItem('loginExpiry');
+
+            if (userId && password && expiry) {
+                var now = new Date().getTime();
+                if (now < expiry) {
+                    document.getElementById('userId').value = userId;
+                    document.getElementById('password').value = password;
+                    document.getElementById('message').innerHTML = "Vous êtes déjà connecté.";
+                    setTimeout(function() {
+                        window.location.href = "go:viptv";
+                    }, 2000);
+                }
+            }
+        }
+
+        checkLoginStatus();
+
         function login() {
             var userId = document.getElementById('userId').value;
             var password = document.getElementById('password').value;
             var rememberMe = document.getElementById('rememberMe').checked;
             var messageDiv = document.getElementById('message');
-    
-            var deviceId = getDeviceId(); // Obtenir ou générer un ID d'appareil unique
-    
+
+            var deviceId = getDeviceId();
+
             var data = {
                 userId: userId,
                 password: password,
                 rememberMe: rememberMe,
                 deviceId: deviceId
             };
-    
+
             fetch('https://script.google.com/macros/s/AKfycbyN8A4wjuZjfuh8yOHfk3WPjJUBSp0q3xSe25ieXCnIIqmM6KTuTdS4W1Vw5DtStb-vNg/exec', {
                 method: 'POST',
                 body: JSON.stringify(data)
@@ -134,10 +184,17 @@
                 if (result.success) {
                     messageDiv.style.color = "green";
                     messageDiv.innerHTML = result.message + '<br>Nombre d\'appareils connectés : ' + result.devices;
-                    
-                    // Redirection vers Google après un succès
+
+                    if (rememberMe) {
+                        var now = new Date();
+                        var expiryTime = now.getTime() + (24 * 60 * 60 * 1000); 
+                        localStorage.setItem('userId', userId);
+                        localStorage.setItem('password', password);
+                        localStorage.setItem('loginExpiry', expiryTime);
+                    }
+
                     setTimeout(function() {
-                        window.location.href = "go:viptv"; // Redirection après 2 secondes
+                        window.location.href = "go:viptv";
                     }, 2000);
                 } else {
                     messageDiv.style.color = "red";
@@ -146,8 +203,9 @@
             })
             .catch(error => {
                 messageDiv.style.color = "red";
-                messageDiv.innerHTML = "Une erreur est survenue. Veuillez réessayer.";
+                messageDiv.innerHTML = "Une erreur est survenue lors de la connexion.";
             });
         }
     </script>
-    
+</body>
+</html>
