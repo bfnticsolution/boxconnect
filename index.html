@@ -11,16 +11,45 @@
                 border-color: #ff1b1b;
                 box-shadow: 0 0 10px #ff1b1b, 0 0 20px #ff1b1b, 0 0 30px #ff1b1b, 0 0 40px #ff1b1b;
             }
-            50% {
+            10% {
                 border-color: #fbfbfb;
-                box-shadow: 0 0 20px #f6f6f5, 0 0 40px #a70404, 0 0 60px #fff700, 0 0 80px #c40505;
+                box-shadow: 0 0 20px #f6f6f5, 0 0 40px #fbfbfb, 0 0 60px #fbfbfb, 0 0 80px #fbfbfb;
             }
-            100% {
+            10% {
                 border-color: #ff1b1b;
-                box-shadow: 0 0 10px #ff1b1b, 0 0 20px #2cab09, 0 0 30px #ff1b1b, 0 0 40px #ff1b1b;
+                box-shadow: 0 0 10px #fbfbfb, 0 0 20px #fbfbfb, 0 0 30px #fbfbfb, 0 0 40px #fbfbfb;
             }
         }
 
+        @keyframes button-border {
+            0% {
+                border-color: #fbfbfb;
+                box-shadow: 0 0 10px #fbfbfb, 0 0 20px #fbfbfb, 0 0 30px #fbfbfb, 0 0 40px #fbfbfb;
+            }
+            50% {
+                border-color: #fbfbfb;
+                box-shadow: 0 0 10px #fbfbfb, 0 0 20px #fbfbfb, 0 0 30px #fbfbfb, 0 0 40px #fbfbfb;
+            }
+            100% {
+                border-color: #077009;
+                box-shadow: 0 0 10px #02640b, 0 0 20px #1a6d04, 0 0 30px #02540d, 0 0 40px #045002;
+            }
+        }
+
+        @keyframes profile-picture-border {
+            0% {
+                border-color: #f6f0f0;
+                box-shadow: 0 0 10px #fbfbfb, 0 0 20px #fbfbfb, 0 0 30px #fbfbfb, 0 0 40px #fbfbfb;
+            }
+            50% {
+                border-color: #fbfbfb;
+                box-shadow: 0 0 10px #f1f5f2, 0 0 20px #fdfdfc, 0 0 30px #f1f4f1, 0 0 40px #f0f4f0;
+            }
+            100% {
+                border-color: #004100;
+                box-shadow: 0 0 10px #056005, 0 0 20px #026a02, 0 0 30px #03530e, 0 0 40px #045002;
+            }
+        }
         /* Animation du fond du body */
         @keyframes backgroundAnimation {
             0% {
@@ -35,7 +64,7 @@
         }
 
         body {
-            background: linear-gradient(270deg, #ff1b1b, #ff0008, #054f12, #fff700, #df0707);
+            background: linear-gradient(270deg, #ff1b1b, #ff0008, #f5f7f5, #e40f04, #df0707);
             background-size: 1000% 1000%;
             animation: backgroundAnimation 10s ease infinite; /* Animation du fond */
             color: white;
@@ -43,6 +72,7 @@
             text-align: center;
             margin: 0;
             padding: 0;
+
         }
 
         .login-container {
@@ -54,7 +84,7 @@
             max-width: 300px;
             margin: 50px auto;
             border: 5px solid #faf7f7f9;
-            animation: glowing-border 3s infinite; /* Bordure lumineuse animée */
+            animation: glowing-border 10s infinite; /* Bordure lumineuse animée */
         }
 
         h1 { color: #e01a1a; }
@@ -68,6 +98,8 @@
             border-radius: 5px;
             border: none;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+           
+
         }
         button {
             padding: 10px 30px;
@@ -78,7 +110,7 @@
             cursor: pointer;
             font-family: Arial, sans-serif;
             font-size: 1.5em;
-            animation: glowing-border 3s infinite;
+            animation: button-border 3s infinite;
         }
         button:hover { background-color: #d41717; }
         .message { margin-top: 20px; font-weight: bold; }
@@ -95,6 +127,7 @@
             height: 100px;
             border-radius: 50%;
             margin-bottom: 20px;
+            animation: profile-picture-border 3s infinite;
         }
         @media (max-width: 300px) {
             h1 { font-size: 1.6em; }
@@ -118,7 +151,7 @@
         <div id="message" class="message"></div>
     </div>
     <div>
-        <a href="whatsapp://send?text=Bonjour! je suis sur l'application TV BOX AFRICA et je n'arrive pas à accéder&phone=22605585868">
+        <a href="whatsapp://send?text=Bonjour! je suis sur l'application BOX AFRICA et je n'arrive pas à accéder à mon contenu&phone=22669696924">
             <img src="https://moein.video/wp-content/uploads/2021/12/Whatsapp-Logo-GIF-WhatsApp-Icon-GIF-Royalty-Free-Animated-Icon-GIF-350px-after-effects-project.gif" width="100px" height="100px">
         </a>
         <h3>Assistance</h3>
