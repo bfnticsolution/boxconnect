@@ -12,11 +12,11 @@
                 box-shadow: 0 0 10px #490209, 0 0 20px #490209, 0 0 30px #490209, 0 0 40px #490209;
             }
             10% {
-                border-color: #fbfbfb;
-                box-shadow: 0 0 20px #f6f6f5, 0 0 40px #fbfbfb, 0 0 60px #fbfbfb, 0 0 80px #fbfbfb;
+                border-color: #ff7504;
+                box-shadow: 0 0 20px #f6f6f5, 0 0 40px #f17a02, 0 0 60px #fbfbfb, 0 0 80px #fbfbfb;
             }
             10% {
-                border-color: #490209;
+                border-color: #05e539;
                 box-shadow: 0 0 10px #fbfbfb, 0 0 20px #fbfbfb, 0 0 30px #fbfbfb, 0 0 40px #fbfbfb;
             }
         }
@@ -64,7 +64,7 @@
         }
 
         body {
-            background: linear-gradient(270deg, #490209, #490209, #f5f7f5, #490209, #490209);
+            background-image: linear-gradient(to right, #0f0457, #290702);
             background-size: 1000% 1000%;
             animation: backgroundAnimation 10s ease infinite; /* Animation du fond */
             color: white;
@@ -78,7 +78,7 @@
         .login-container {
             margin-top: 50px;
             padding: 20px;
-            background-color: #020101;
+            background-image: linear-gradient(to right, #0f0457, #290702);
             border-radius: 30px;
             width: 90%;
             max-width: 300px;
@@ -87,7 +87,7 @@
             animation: glowing-border 10s infinite; /* Bordure lumineuse animée */
         }
 
-        h1 { color: #490209; }
+        h1 { color: #018221; }
         h2 { color: white; text-align: left; }
         input {
             display: block;
@@ -103,8 +103,8 @@
         }
         button {
             padding: 10px 30px;
-            background-color: #490209;
-            color: white;
+            background-image: linear-gradient(to right, #0f0457, #290702);
+            color: rgb(3, 252, 20);
             border: 5px solid #faf7f7f9;
             border-radius: 50px;
             cursor: pointer;
@@ -140,9 +140,9 @@
         <img src="https://png.pngtree.com/png-vector/20191008/ourmid/pngtree-profile-icon-isolated-on-abstract-background-png-image_1793248.jpg" alt="Photo de profil" class="profile-picture">
         <h1>Connexion</h1>
         <h2>Identifiant</h2>
-        <input type="text" id="userId" placeholder="Identifiant" required>
+        <input type="text" id="userId" placeholder="Saisissez votre Identifiant ici!" required>
         <h2>Mot de passe</h2>
-        <input type="text" id="password" placeholder="Mot de passe" required>
+        <input type="text" id="password" placeholder="Saisissez votre Mot de passe ici !" required>
         <div class="remember-me">
             <input type="checkbox" id="rememberMe" checked/> <label for="rememberMe">Se souvenir de moi</label>
         </div>
